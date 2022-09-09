@@ -5,33 +5,32 @@ const fs = require("lowdb/adapters/FileSync");
 const adapter = new fs("db.json");
 const db = low(adapter);
 const cors = require("cors");
-const { faker } = require("@faker-js/faker");
 
-// allow cross-origin resource sharing (CORS)
+// Allow cross-origin resource sharing (CORS)
 app.use(cors());
 
-// data parser - used to parse post data
-var bodyParser = require("body-parser");
+// Data parser - used to parse post data
+const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// serve static files from public directory
-// -------------------------------------------
+// Serve static files from public directory
 app.use(express.static("public"));
 
-// init the data store
+// Init the data store
 db.defaults({ users: [] }).write();
 
+// Set port to Heroku's environment or localhost
 let port = process.env.PORT || 3000;
 
-// return all users
-app.get("/accounts", function (req, res) {
+// Return all users
+app.get("/data", function (req, res) {
   res.send(db.get("users").value());
 });
 
-// add user
-app.post("/accounts", function (req, res) {
-  var user = {
+// Add user
+app.post("/add", function (req, res) {
+  const user = {
     name: req.body.name,
     dob: req.body.dob,
     email: req.body.email,
@@ -42,14 +41,14 @@ app.post("/accounts", function (req, res) {
     citystatezip: req.body.citystatezip,
     latitude: req.body.latitude,
     longitude: req.body.longitude,
-    avatar: faker.internet.avatar(),
+    avatar: req.body.avatar,
   };
   db.get("users").push(user).write();
   console.log(db.get("users").value());
   res.send(db.get("users").value());
 });
 
-// start server
+// Start server
 // -----------------------
 app.listen(port, function () {
   console.log(`Running on port ${port}`);
