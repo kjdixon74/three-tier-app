@@ -21,7 +21,7 @@ app.use(express.static("public"));
 db.defaults({ users: [] }).write();
 
 // Set port to Heroku's environment or localhost
-let port = process.env.PORT || 3000;
+let port = process.env.PORT || 5000;
 exports.port = port;
 
 // Return all users
