@@ -51,7 +51,6 @@ app.post("/add", function (req, res) {
 
 // Start server
 // -----------------------
-app.listen(port, function () {
-  let test;
+// app.listen(port, function () {
 //   console.log(`Running on port ${port}`);
-});
+// });
