@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm install",
     "start": "node http_server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -27,5 +27,8 @@
   },
   "engines": {
     "node": "v16.16.0"
+  },
+  "devDependencies": {
+    "jest": "^29.3.1"
   }
 }
